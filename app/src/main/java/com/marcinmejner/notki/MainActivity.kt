@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.marcinmejner.notki.adapter.NotesAdapter
 import com.marcinmejner.notki.model.NoteEntity
 import com.marcinmejner.notki.utils.SampleData
 
@@ -23,17 +24,17 @@ class MainActivity : AppCompatActivity() {
 
     //vars
     var notesData = ArrayList<NoteEntity>()
+    lateinit var notesAdapter: NotesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        init()
-
         notesData.addAll(SampleData.getNotes())
 
-        notesData.forEach { Log.d(TAG, "onCreate: $it") }
+
+        init()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun init(){
-        initWidgets()
+        initRecyclerView()
         initFab()
         }
 
@@ -62,11 +63,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initWidgets() {
+    private fun initRecyclerView() {
         recyclerView = recycler_view
         recyclerView?.hasFixedSize()
         val layoutManager = LinearLayoutManager(this)
         recyclerView?.layoutManager = layoutManager
+        notesAdapter = NotesAdapter(notesData, this)
+        recyclerView?.adapter = notesAdapter
     }
 }
 
