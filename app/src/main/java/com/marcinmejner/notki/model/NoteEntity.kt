@@ -3,8 +3,8 @@ package com.marcinmejner.notki.model
 import java.util.*
 
 data class NoteEntity(
-                        var id:Int,
-                        var date: Date,
-                        var text:String
+        var date: Date? = null,
+        var text:String = "",
+        var id:Int = 0
 )
 
