@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
           Intent(this@MainActivity, EditActivity::class.java).apply {
               startActivity(this)
+
           }
         }
     }
