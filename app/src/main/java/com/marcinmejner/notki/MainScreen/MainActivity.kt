@@ -1,13 +1,15 @@
-package com.marcinmejner.notki
+package com.marcinmejner.notki.MainScreen
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.marcinmejner.notki.EditorScreen.EditActivity
+import com.marcinmejner.notki.R
 import com.marcinmejner.notki.adapter.NotesAdapter
 import com.marcinmejner.notki.model.NoteEntity
 import com.marcinmejner.notki.utils.SampleData
@@ -58,8 +60,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun initFab() {
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+          Intent(this@MainActivity, EditActivity::class.java).apply {
+              startActivity(this)
+          }
         }
     }
 
