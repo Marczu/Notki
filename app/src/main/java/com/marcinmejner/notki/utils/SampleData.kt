@@ -1,6 +1,6 @@
 package com.marcinmejner.notki.utils
 
-import com.marcinmejner.notki.model.NoteEntity
+import com.marcinmejner.notki.database.NoteEntity
 import java.util.*
 
 class SampleData {

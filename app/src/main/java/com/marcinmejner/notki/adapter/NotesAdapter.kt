@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.marcinmejner.notki.R
-import com.marcinmejner.notki.model.NoteEntity
-import kotlinx.android.synthetic.main.content_main.view.*
+import com.marcinmejner.notki.database.NoteEntity
 import kotlinx.android.synthetic.main.note_list_item.view.*
 
 class NotesAdapter(val notesList: ArrayList<NoteEntity>, val context: Context) : RecyclerView.Adapter<NotesAdapter.ViewHolder>() {

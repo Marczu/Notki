@@ -2,7 +2,6 @@ package com.marcinmejner.notki.MainScreen
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -11,7 +10,7 @@ import android.view.MenuItem
 import com.marcinmejner.notki.EditorScreen.EditActivity
 import com.marcinmejner.notki.R
 import com.marcinmejner.notki.adapter.NotesAdapter
-import com.marcinmejner.notki.model.NoteEntity
+import com.marcinmejner.notki.database.NoteEntity
 import com.marcinmejner.notki.utils.SampleData
 
 import kotlinx.android.synthetic.main.activity_main.*
