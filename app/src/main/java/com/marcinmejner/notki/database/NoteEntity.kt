@@ -6,8 +6,8 @@ import java.util.*
 
 @Entity(tableName = "notes")
 data class NoteEntity(
-        @PrimaryKey(autoGenerate = true) var id:Int = 0,
         var date: Date? = null,
-        var noteText:String = ""
+        var noteText:String = "",
+        @PrimaryKey(autoGenerate = true) var id:Int = 0
 )
 

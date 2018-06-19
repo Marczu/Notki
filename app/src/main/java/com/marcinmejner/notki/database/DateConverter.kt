@@ -5,20 +5,16 @@ import java.util.*
 
 class DateConverter {
 
-    companion object {
-
         @TypeConverter
-        fun toDate(timestamp: Long): Date?{
+        fun toDate(timestamp: Long?): Date?{
 
-            return Date(timestamp)
+            return if(timestamp == null) null else Date(timestamp)
         }
 
         @TypeConverter
         fun toTimeStamp(date: Date?): Long? {
             return date?.time
         }
-
-    }
 
 }
 
