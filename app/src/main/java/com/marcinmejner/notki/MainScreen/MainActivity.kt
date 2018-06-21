@@ -6,13 +6,13 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.marcinmejner.notki.EditorScreen.EditActivity
 import com.marcinmejner.notki.R
 import com.marcinmejner.notki.adapter.NotesAdapter
 import com.marcinmejner.notki.database.NoteEntity
-import com.marcinmejner.notki.utils.SampleData
 import com.marcinmejner.notki.viewModel.MainViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        notesData.addAll(SampleData.getNotes())
-
-
         init()
+
+        notesData.addAll(mainViewModel.notes)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -49,10 +49,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        return when (item.itemId) {
-            R.id.action_settings -> true
+        when (item.itemId) {
+            R.id.action_add_sample_data -> addSampleData()
             else -> super.onOptionsItemSelected(item)
+
         }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun addSampleData() {
+        Log.d(TAG, "addSampleData: klikniete")
+
     }
 
     private fun init(){
