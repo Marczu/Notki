@@ -1,5 +1,6 @@
 package com.marcinmejner.notki.MainScreen
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -12,6 +13,7 @@ import com.marcinmejner.notki.R
 import com.marcinmejner.notki.adapter.NotesAdapter
 import com.marcinmejner.notki.database.NoteEntity
 import com.marcinmejner.notki.utils.SampleData
+import com.marcinmejner.notki.viewModel.MainViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     //vars
     var notesData = ArrayList<NoteEntity>()
     lateinit var notesAdapter: NotesAdapter
+    lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,10 +55,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun init(){
+    private fun init(){
+        initViewModel()
         initRecyclerView()
         initFab()
         }
+
+    private fun initViewModel() {
+        mainViewModel = ViewModelProviders.of(this)
+                .get(MainViewModel::class.java)
+    }
 
     private fun initFab() {
         fab.setOnClickListener { view ->

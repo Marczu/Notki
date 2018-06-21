@@ -25,9 +25,9 @@ class SampleData {
         fun getNotes(): List<NoteEntity> {
             val notes = mutableListOf<NoteEntity>()
 
-            notes.add(NoteEntity(getDate(0), SAMPLE_TEXT_1, 1))
-            notes.add(NoteEntity(getDate(-1), SAMPLE_TEXT_2, 2))
-            notes.add(NoteEntity(getDate(-2), SAMPLE_TEXT_3, 3))
+            notes.add(NoteEntity(getDate(0), SAMPLE_TEXT_1 ))
+            notes.add(NoteEntity(getDate(-1), SAMPLE_TEXT_2))
+            notes.add(NoteEntity(getDate(-2), SAMPLE_TEXT_3))
 
             return notes
         }

@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4
 import android.util.Log
 import com.marcinmejner.notki.database.AppDatabase
 import com.marcinmejner.notki.database.NoteDao
+import com.marcinmejner.notki.database.NoteEntity
 import com.marcinmejner.notki.utils.SampleData
 import org.junit.After
 import org.junit.Before
@@ -21,7 +22,7 @@ class DataBaseTest {
     var dao: NoteDao? = null
 
     @Before
-    fun createDb(){
+    fun createDb() {
         val context = InstrumentationRegistry.getTargetContext()
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         dao = db.noteDao()
@@ -29,17 +30,28 @@ class DataBaseTest {
     }
 
     @After
-    fun closeDb(){
+    fun closeDb() {
         db.close()
         Log.d(TAG, "closeDb: databse closed")
     }
 
     @Test
-    fun createAndRetriveNotes(){
+    fun createAndRetriveNotes() {
         dao?.insertAll(SampleData.getNotes())
         var count = dao?.getCount()
         Log.d(TAG, "createAndRetriveNotes: count $count")
+
         assertEquals(SampleData.getNotes().size, count)
+    }
+
+    @Test
+    fun compareStrings() {
+        dao?.insertAll(SampleData.getNotes())
+        val original: NoteEntity = SampleData.getNotes()[0]
+        val fromDb: NoteEntity = dao?.getNoteById(1)!!
+
+        assertEquals(original.noteText, fromDb.noteText)
+        assertEquals(1, fromDb.id)
     }
 
 }
