@@ -9,13 +9,15 @@ import com.marcinmejner.notki.utils.SampleData
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val TAG = "MainViewModel"
 
-    var repository: AppRepository = AppRepository
+    var repository: AppRepository = AppRepository.getInstance(application.applicationContext)
     var notes: List<NoteEntity>
 
     init {
         notes = repository.notes
     }
 
-
+    fun addSampleData() {
+        repository.addSampleData()
+    }
 
 }

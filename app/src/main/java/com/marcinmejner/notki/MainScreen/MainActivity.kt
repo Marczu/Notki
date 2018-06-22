@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addSampleData() {
         Log.d(TAG, "addSampleData: klikniete")
+        mainViewModel.addSampleData()
 
     }
 
