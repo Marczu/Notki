@@ -1,13 +1,25 @@
 package com.marcinmejner.notki.database
 
+import android.arch.lifecycle.LiveData
 import android.content.Context
+import android.util.Log
 import com.marcinmejner.notki.utils.SampleData
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 
 
 class AppRepository private constructor(context: Context) {
     private val TAG = "AppRepository"
 
-    val notes: List<NoteEntity> = SampleData.getNotes()
+    var notes: LiveData<List<NoteEntity>>
+    var db: AppDatabase
+    val executor: Executor = Executors.newSingleThreadExecutor()
+
+    init {
+        Log.d(TAG, "AppRepository started: ")
+        db = AppDatabase.getInstance(context)
+        notes = getAllNotes()
+    }
 
     companion object {
         private var ourInstance: AppRepository? = null
@@ -21,6 +33,12 @@ class AppRepository private constructor(context: Context) {
     }
 
     fun addSampleData() {
+        executor.execute {
+            db.noteDao().insertAll(SampleData.getNotes())
+        }
+    }
 
+    fun getAllNotes(): LiveData<List<NoteEntity>> {
+        return db.noteDao().getall()
     }
 }

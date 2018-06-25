@@ -1,5 +1,6 @@
 package com.marcinmejner.notki.MainScreen
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     //vars
     var notesData = ArrayList<NoteEntity>()
-    lateinit var notesAdapter: NotesAdapter
+    var notesAdapter: NotesAdapter? = null
     lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
         init()
 
-        notesData.addAll(mainViewModel.notes)
 
     }
 
@@ -64,21 +64,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init(){
-        initViewModel()
         initRecyclerView()
+        initViewModel()
         initFab()
         }
 
     private fun initViewModel() {
+        val notesObserver: Observer<List<NoteEntity>> = Observer {
+            notesData.clear()
+            notesData.addAll(it!!)
+
+            if(notesAdapter == null){
+                notesAdapter = NotesAdapter(notesData, this@MainActivity)
+                recyclerView?.adapter = notesAdapter
+            }else{
+                notesAdapter?.notifyDataSetChanged()
+            }
+        }
+
         mainViewModel = ViewModelProviders.of(this)
                 .get(MainViewModel::class.java)
+        mainViewModel.notes.observe(this, notesObserver)
     }
 
     private fun initFab() {
         fab.setOnClickListener { view ->
           Intent(this@MainActivity, EditActivity::class.java).apply {
               startActivity(this)
-
           }
         }
     }
@@ -88,8 +100,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView?.hasFixedSize()
         val layoutManager = LinearLayoutManager(this)
         recyclerView?.layoutManager = layoutManager
-        notesAdapter = NotesAdapter(notesData, this)
-        recyclerView?.adapter = notesAdapter
+
     }
 }
 
