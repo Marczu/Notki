@@ -92,4 +92,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_delete_all">Delete All</string>
+    <string name="notes_id_key">notes_id_key</string>
 </resources>

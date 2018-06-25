@@ -47,4 +47,8 @@ class AppRepository private constructor(context: Context) {
     fun getAllNotes(): LiveData<List<NoteEntity>> {
         return db.noteDao().getall()
     }
+
+    fun getNoteById(noteId: Int): NoteEntity? {
+        return db.noteDao().getNoteById(noteId)
+    }
 }
