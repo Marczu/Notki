@@ -51,10 +51,15 @@ class MainActivity : AppCompatActivity() {
 
         when (item.itemId) {
             R.id.action_add_sample_data -> addSampleData()
+            R.id.action_add_delete_all -> deleteAllNotes()
             else -> super.onOptionsItemSelected(item)
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteAllNotes() {
+        mainViewModel.deleteAllNotes()
     }
 
     private fun addSampleData() {

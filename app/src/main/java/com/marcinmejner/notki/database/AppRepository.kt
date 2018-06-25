@@ -38,6 +38,12 @@ class AppRepository private constructor(context: Context) {
         }
     }
 
+    fun deleteAllNotes() {
+        executor.execute {
+            db.noteDao().deleteAll()
+        }
+    }
+
     fun getAllNotes(): LiveData<List<NoteEntity>> {
         return db.noteDao().getall()
     }

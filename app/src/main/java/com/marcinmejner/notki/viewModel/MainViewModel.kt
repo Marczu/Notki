@@ -23,4 +23,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.addSampleData()
     }
 
+    fun deleteAllNotes() {
+        repository.deleteAllNotes()
+    }
+
 }
