@@ -23,4 +23,17 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             liveNote.postValue(note)
         }
     }
+
+    fun saveNote(noteTxt: String) {
+        val note = liveNote.value
+
+        if (note == null) {
+
+        }else{
+            note.noteText = noteTxt
+        }
+
+        repository.insertNote(note)
+
+    }
 }

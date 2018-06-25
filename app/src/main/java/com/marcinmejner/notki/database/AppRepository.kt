@@ -51,4 +51,10 @@ class AppRepository private constructor(context: Context) {
     fun getNoteById(noteId: Int): NoteEntity? {
         return db.noteDao().getNoteById(noteId)
     }
+
+    fun insertNote(note: NoteEntity?) {
+        executor.execute {
+            db.noteDao().insertNote(note!!)
+        }
+    }
 }
