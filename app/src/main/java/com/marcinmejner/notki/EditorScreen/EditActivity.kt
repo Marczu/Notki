@@ -49,10 +49,10 @@ class EditActivity : AppCompatActivity() {
 
         val extras = intent.extras
         if (extras == null) {
-            title = "New Note"
+            title = "Nowa Notka"
             newNote = true
         }else{
-            title = "Edit Note"
+            title = "Wyedytuj Notkę"
             var noteId = extras.getInt(NOTES_ID_KEY)
             editorViewModel.loadData(noteId)
         }
