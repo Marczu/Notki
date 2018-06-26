@@ -57,4 +57,10 @@ class AppRepository private constructor(context: Context) {
             db.noteDao().insertNote(note!!)
         }
     }
+
+    fun deleteNote(note: NoteEntity?) {
+        executor.execute {
+            db.noteDao().deleteNote(note!!)
+        }
+    }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.marcinmejner.notki.R
 import com.marcinmejner.notki.utils.NOTES_ID_KEY
@@ -15,9 +16,6 @@ import kotlinx.android.synthetic.main.content_edit.*
 
 class EditActivity : AppCompatActivity() {
     private val TAG = "EditActivity"
-
-    //widgets
-
 
     //vars
     lateinit var editorViewModel: EditorViewModel
@@ -31,7 +29,6 @@ class EditActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         init()
-
     }
 
     private fun init() {
@@ -51,21 +48,24 @@ class EditActivity : AppCompatActivity() {
         if (extras == null) {
             title = "Nowa Notka"
             newNote = true
-        }else{
+        } else {
             title = "Wyedytuj Notkę"
             var noteId = extras.getInt(NOTES_ID_KEY)
             editorViewModel.loadData(noteId)
         }
     }
 
-
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
         if (item?.itemId == android.R.id.home) {
             finish()
         }
         if (item?.itemId == R.id.menu_save_data) {
             saveAndReturn()
+        }
+        if (item?.itemId == R.id.menu_delete_item) {
+            editorViewModel.deleteNote()
+            finish()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -77,6 +77,10 @@ class EditActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_edit, menu)
+        if (newNote) {
+            menu?.findItem(R.id.menu_delete_item)?.isVisible = false
+        }
+
         return super.onCreateOptionsMenu(menu)
     }
 }
